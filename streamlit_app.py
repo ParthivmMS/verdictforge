@@ -1,42 +1,40 @@
-
 import streamlit as st
-
-st.set_page_config(page_title="VerdictForge", page_icon="⚖️", layout="centered")
-
-st.title("VerdictForge: Legal Draft Generator")
-st.markdown("Enter details to generate legal drafts.")
-
-case_name = st.text_input("Case Name")
-judge_name = st.text_input("Judge Name")
-summary = st.text_area("Enter Judgment Summary")
-
-if st.button("Generate Draft"):
-    if case_name and judge_name and summary:
-        draft = f"""
-IN THE HON'BLE COURT OF LAW
-
-Case: {case_name}
-
-BEFORE: Hon'ble Justice {judge_name}
-
-JUDGMENT SUMMARY:
-{summary}
-
-This judgment is passed under the authority of the court based on the facts and evidence presented.
-
-DATED: ___________
-
-(Signed)
-Hon'ble Justice {judge_name}
-"""
-        st.markdown("### Generated Legal Draft:")
-        st.code(draft, language='markdown')
-    else:
-        st.warning("Please fill in all the fields before generating the draft.")
-
-from dotenv import load_dotenv
 import os
+import openai
+from dotenv import load_dotenv
 
-load_dotenv()  # Load .env file
+# Load environment variables
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-hf_token = os.getenv("HUGGINGFACE_TOKEN")
+# Streamlit UI
+st.set_page_config(page_title="VerdictForge: Judgment Summarizer", page_icon="⚖️")
+st.title("VerdictForge: Judgment Summarizer")
+st.markdown("Upload or paste a legal judgment and get a crisp summary with reasoning.")
+
+# Input box
+judgment_input = st.text_area("Paste the full judgment here", height=300)
+
+# Button to generate summary
+if st.button("Generate Summary"):
+    if not judgment_input.strip():
+        st.warning("Please paste a judgment to summarize.")
+    else:
+        with st.spinner("Summarizing..."):
+            try:
+                response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {"role": "system", "content": "You are a legal assistant specialized in Indian court judgments. Summarize the judgment into a short paragraph followed by a bullet-point list of the reasoning."},
+                        {"role": "user", "content": judgment_input}
+                    ],
+                    temperature=0.5,
+                    max_tokens=800
+                )
+
+                summary = response['choices'][0]['message']['content']
+                st.subheader("Summary:")
+                st.write(summary)
+
+            except Exception as e:
+                st.error("Something went wrong while generating the summary.")
