@@ -1,31 +1,43 @@
+print(hf_token)  # This will show your token if it's working
+
 import streamlit as st
-from transformers import pipeline
 
-# Page title
-st.set_page_config(page_title="Judgment Summarizer", layout="centered")
-st.title("Judgment Summarizer")
-st.markdown("**Summarize long legal judgments instantly using AI**")
+st.set_page_config(page_title="VerdictForge", page_icon="⚖️", layout="centered")
 
-# Input box
-text_input = st.text_area("Paste the legal judgment text below:", height=300)
+st.title("VerdictForge: Legal Draft Generator")
+st.markdown("Enter details to generate legal drafts.")
 
-# Load the summarization pipeline
-@st.cache_resource
-def load_summarizer():
-    return pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+case_name = st.text_input("Case Name")
+judge_name = st.text_input("Judge Name")
+summary = st.text_area("Enter Judgment Summary")
 
-summarizer = load_summarizer()
+if st.button("Generate Draft"):
+    if case_name and judge_name and summary:
+        draft = f"""
+IN THE HON'BLE COURT OF LAW
 
-# Button to summarize
-if st.button("Summarize"):
-    if not text_input.strip():
-        st.warning("Please paste some legal judgment text first.")
+Case: {case_name}
+
+BEFORE: Hon'ble Justice {judge_name}
+
+JUDGMENT SUMMARY:
+{summary}
+
+This judgment is passed under the authority of the court based on the facts and evidence presented.
+
+DATED: ___________
+
+(Signed)
+Hon'ble Justice {judge_name}
+"""
+        st.markdown("### Generated Legal Draft:")
+        st.code(draft, language='markdown')
     else:
-        with st.spinner("Summarizing..."):
-            chunks = [text_input[i:i+1000] for i in range(0, len(text_input), 1000)]
-            summary = ""
-            for chunk in chunks:
-                result = summarizer(chunk, max_length=130, min_length=30, do_sample=False)
-                summary += result[0]['summary_text'] + " "
-            st.success("Summary:")
-            st.write(summary.strip())
+        st.warning("Please fill in all the fields before generating the draft.")
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Load .env file
+
+hf_token = os.getenv("HUGGINGFACE_TOKEN")
