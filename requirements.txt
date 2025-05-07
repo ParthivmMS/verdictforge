@@ -2,4 +2,4 @@ streamlit
 requests
 transformers
 python-dotenv
-
+openai
