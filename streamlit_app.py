@@ -1,4 +1,3 @@
-print(hf_token)  # This will show your token if it's working
 
 import streamlit as st
 
