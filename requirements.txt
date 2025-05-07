@@ -1,2 +1,5 @@
-transformers
 streamlit
+requests
+transformers
+python-dotenv
+
