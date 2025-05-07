@@ -6,7 +6,7 @@ st.title("VerdictForge: Legal Judgment Summarizer")
 st.write("Upload or paste a legal judgment and get a crisp summary with reasoning.")
 
 # Hugging Face API info
-API_URL = "https://api-inference.huggingface.co/models/sjvasquez/legal-longformer-base-4096-finetuned-legal-summarization"
+API_URL = API_URL = "https://api-inference.huggingface.co/models/knkarthick/MEETING_SUMMARY"
 headers = {"Authorization": f"Bearer {st.secrets['HF_API_KEY']}"}
 
 def query(payload):
