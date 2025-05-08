@@ -3,7 +3,7 @@ import requests
 import os
 
 # Load the API key from secrets
-API_URL = "https://api-inference.huggingface.co/models/sjvasquez/legal-longformer-summarizer"
+API_URL = "https://api-inference.huggingface.co/models/knkarthick/Legal-BERT-Summarizer"
 
 headers = {
     "Authorization": f"Bearer {st.secrets['HF_API_KEY']}"
