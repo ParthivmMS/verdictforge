@@ -1,15 +1,15 @@
 import streamlit as st
 import requests
 
-# Hugging Face Inference API URL
-API_URL = "https://api-inference.huggingface.co/models/falconsai/text_summarization"
+# Hugging Face Model API URL
+API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
 
-# Get token from Streamlit secrets
+# Get token securely from Streamlit secrets
 headers = {
     "Authorization": f"Bearer {st.secrets['HF_API_KEY']}"
 }
 
-# Function to query the model
+# Query function
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
     if response.status_code != 200:
@@ -17,23 +17,21 @@ def query(payload):
         return None
     return response.json()
 
-# Streamlit App UI
-st.title("VerdictForge - Legal Judgment Summarizer")
-st.markdown("Upload or paste a full legal judgment below and get a crisp summary.")
+# UI
+st.title("VerdictForge – Legal Judgment Summarizer")
+st.markdown("Paste a legal judgment below to generate a summary.")
 
-input_text = st.text_area("Paste the full judgment here")
+input_text = st.text_area("Paste the judgment here")
 
 if st.button("Generate Summary"):
-    if input_text.strip() == "":
-        st.warning("Please paste a judgment first.")
+    if not input_text.strip():
+        st.warning("Please paste a legal judgment first.")
     else:
-        st.info("Generating summary, please wait...")
+        st.info("Generating summary...")
         result = query({"inputs": input_text})
         if result:
             try:
-                summary = result[0]["summary_text"]
-                st.success("Summary Generated:")
-                st.write(summary)
+                st.success("Summary:")
+                st.write(result[0]['summary_text'])
             except:
-                st.error("Unexpected response format from Hugging Face API.")
-
+                st.error("The model returned an unexpected format.")
