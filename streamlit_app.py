@@ -2,7 +2,8 @@ import streamlit as st
 import requests
 
 # Hugging Face Model API URL
-API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
+API_URL = "https://api-inference.huggingface.co/models/pszemraj/long-t5-tglobal-base-16384-book-summary"
+
 
 # Get token securely from Streamlit secrets
 headers = {
@@ -28,7 +29,8 @@ if st.button("Generate Summary"):
         st.warning("Please paste a legal judgment first.")
     else:
         st.info("Generating summary...")
-        result = query({"inputs": input_text})
+       result = query({"inputs": f"Summarize the following legal case in 3-4 lines focusing on facts, issues, and final decision:\n\n{input_text}"})
+
         if result:
             try:
                 st.success("Summary:")
