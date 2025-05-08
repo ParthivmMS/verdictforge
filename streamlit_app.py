@@ -1,27 +1,23 @@
 import streamlit as st
 import requests
 
-# Load the API key from secrets
-API_URL = "https://api-inference.huggingface.co/models/pszemraj/led-large-book-summary"
+# Hugging Face Inference API URL
+API_URL = "https://api-inference.huggingface.co/models/falconsai/text_summarization"
 
-
+# Get token from Streamlit secrets
 headers = {
     "Authorization": f"Bearer {st.secrets['HF_API_KEY']}"
 }
 
 # Function to query the model
 def query(payload):
-    try:
-        response = requests.post(API_URL, headers=headers, json=payload)
-        if response.status_code != 200:
-            st.error(f"Error {response.status_code}: {response.text}")
-            return None
-        return response.json()
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
+    response = requests.post(API_URL, headers=headers, json=payload)
+    if response.status_code != 200:
+        st.error(f"Error {response.status_code}: {response.text}")
         return None
+    return response.json()
 
-# Streamlit UI
+# Streamlit App UI
 st.title("VerdictForge - Legal Judgment Summarizer")
 st.markdown("Upload or paste a full legal judgment below and get a crisp summary.")
 
@@ -38,7 +34,6 @@ if st.button("Generate Summary"):
                 summary = result[0]["summary_text"]
                 st.success("Summary Generated:")
                 st.write(summary)
-            except (KeyError, IndexError):
-                st.error("Unexpected response format from Hugging Face model.")
-        else:
-            st.error("No summary could be generated.")
+            except:
+                st.error("Unexpected response format from Hugging Face API.")
+
