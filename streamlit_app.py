@@ -1,34 +1,43 @@
 import streamlit as st
 import requests
 
-# Config
-API_URL = "https://api-inference.huggingface.co/models/sshleifer/distilbart-cnn-12-6"
+st.title("⚖️ VerdictForge - Legal Judgment Summarizer")
+st.markdown("Paste a court judgment below. We'll generate a short summary using Mistral.")
+
+API_KEY = st.secrets["OPENROUTER_API_KEY"]
+API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
 headers = {
-    "Authorization": f"Bearer {st.secrets['HF_API_KEY']}"
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json"
 }
 
-def query(payload):
+def get_summary(text):
+    payload = {
+        "model": "mistralai/mistral-7b-instruct",
+        "messages": [
+            {"role": "system", "content": "You are a legal expert who summarizes court judgments into 2–3 clear lines."},
+            {"role": "user", "content": f"Summarize this legal judgment:\n\n{text}"}
+        ],
+        "temperature": 0.5,
+        "max_tokens": 300
+    }
+
     response = requests.post(API_URL, headers=headers, json=payload)
-    if response.status_code != 200:
+    if response.status_code == 200:
+        return response.json()["choices"][0]["message"]["content"]
+    else:
         st.error(f"Error {response.status_code}: {response.text}")
         return None
-    return response.json()
 
-st.title("⚖️ VerdictForge - Legal Judgment Summarizer")
-st.markdown("Paste a court judgment below to get a 3-4 line summary.")
+judgment = st.text_area("📜 Paste your judgment here", height=300)
 
-input_text = st.text_area("📝 Paste the full judgment", height=300)
-
-if st.button("✨ Generate Summary"):
-    if not input_text.strip():
-        st.warning("Please paste the judgment.")
-    else:
+if st.button("🧠 Generate Summary"):
+    if judgment.strip():
         st.info("Summarizing... please wait.")
-        result = query({"inputs": input_text})
-        if result:
-            try:
-                summary = result[0]['summary_text']
-                st.success("✅ Summary:")
-                st.write(summary)
-            except:
-                st.error("⚠️ Unexpected format from API.")
+        summary = get_summary(judgment)
+        if summary:
+            st.success("✅ Summary:")
+            st.write(summary)
+    else:
+        st.warning("Please enter some text.")
