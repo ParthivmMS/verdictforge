@@ -1,54 +1,62 @@
 import streamlit as st
 import requests
-import json
 
-st.title("⚖️ VerdictForge - Legal Judgment Summarizer")
-st.markdown("Paste a court judgment to get an AI-generated summary and a simplified version.")
+st.set_page_config(page_title="VerdictForge - Legal Judgment Summarizer")
 
-OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
+st.title("⚖️ VerdictForge")
+st.subheader("Summarize Legal Judgments using AI")
 
-# Text input
-judgment = st.text_area("📄 Paste Judgment", height=300)
+user_input = st.text_area("Paste your legal judgment here:", height=300)
 
-if st.button("🧠 Generate Summary"):
-    if not judgment.strip():
-        st.warning("Please paste a judgment.")
+if st.button("Summarize"):
+    if not user_input.strip():
+        st.warning("Please paste a judgment to summarize.")
     else:
         with st.spinner("Summarizing..."):
             try:
-                # Step 1: Main Summary
-                prompt_summary = (
-                    f"Summarize the following legal judgment in a short, clear paragraph:\n\n{judgment}"
-                )
+                api_key = st.secrets["OPENROUTER_API_KEY"]
+
                 headers = {
-                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                    "Authorization": f"Bearer {api_key}",
                     "Content-Type": "application/json"
                 }
-                payload_summary = {
-                    "model": "mistralai/mistral-7b-instruct",
-                    "messages": [{"role": "user", "content": prompt_summary}],
+
+                # Phase 1 Smart Prompt
+                prompt = f"""
+You are a legal AI trained to summarize Indian and UK court judgments for law students, interns, and early-stage professionals.
+
+Summarize the following judgment in two clear parts:
+
+1. ✅ **Legal Summary**: Summarize the key legal principles, holdings, and important reasoning in a professional tone. Include:
+   - What legal issue the case addresses.
+   - What rule or principle the court applied.
+   - What decision was made.
+
+2. 📝 **Simplified Summary**: Explain the same case in very simple English like you're talking to a law student or a curious non-lawyer. Use short sentences. Avoid legal jargon.
+
+Here is the judgment:
+\"\"\"
+{user_input}
+\"\"\"
+"""
+
+                data = {
+                    "model": "mistral/mistral-7b-instruct",
+                    "messages": [
+                        {"role": "system", "content": "You are a helpful and accurate legal summarizer."},
+                        {"role": "user", "content": prompt}
+                    ]
                 }
 
-                res1 = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, data=json.dumps(payload_summary))
-                summary_text = res1.json()["choices"][0]["message"]["content"].strip()
+                response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=data)
+                response.raise_for_status()
+                summary = response.json()["choices"][0]["message"]["content"]
 
-                st.success("✅ Legal Summary:")
-                st.write(summary_text)
+                st.success("✅ Summary generated successfully!")
+                st.markdown(summary)
 
-                # Step 2: Simplified Summary
-                prompt_simplified = (
-                    f"Rewrite this legal summary in a shorter and simpler way that a first-year law student can easily understand:\n\n{summary_text}"
-                )
-                payload_simplify = {
-                    "model": "mistralai/mistral-7b-instruct",
-                    "messages": [{"role": "user", "content": prompt_simplified}],
-                }
-
-                res2 = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, data=json.dumps(payload_simplify))
-                simplified_text = res2.json()["choices"][0]["message"]["content"].strip()
-
-                st.info("📝 Simplified Summary:")
-                st.write(simplified_text)
-
-            except Exception as e:
-                st.error(f"❌ Something went wrong: {e}")
+            except requests.exceptions.RequestException as e:
+                st.error("❌ API request failed. Please check your internet or OpenRouter key.")
+                st.exception(e)
+            except KeyError:
+                st.error("❌ OpenRouter API key missing. Please add OPENROUTER_API_KEY to your Streamlit secrets.")
