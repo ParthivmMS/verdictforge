@@ -4,55 +4,48 @@ import requests
 st.set_page_config(page_title="VerdictForge", layout="wide")
 st.title("⚖️ VerdictForge: Legal Judgment Summarizer")
 
-OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
+# Get the API key securely
+api_key = st.secrets["OPENROUTER_API_KEY"]
 
-user_input = st.text_area("Paste your judgment here:", height=300)
+# Input
+user_input = st.text_area("Paste your legal judgment:", height=300)
 
+# On click
 if st.button("Generate Summary"):
     if not user_input.strip():
-        st.warning("Please paste a judgment to summarize.")
+        st.warning("Please enter a legal judgment.")
     else:
-        with st.spinner("Analyzing judgment..."):
+        with st.spinner("Summarizing..."):
+            url = "https://openrouter.ai/api/v1/chat/completions"
 
             headers = {
-                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-                "HTTP-Referer": "https://your-username.streamlit.app",  # replace with your actual streamlit app link
+                "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json"
             }
 
             data = {
-                "model": "openrouter/mistral-7b",
+                "model": "openai/gpt-3.5-turbo",
                 "messages": [
                     {
                         "role": "system",
-                        "content": "You are a legal assistant that provides accurate summaries of Indian court judgments."
+                        "content": "You are a legal assistant AI. Provide a two-part output:\n\n1. Legal Summary: Summarize the judgment in a professional tone suitable for legal professionals.\n2. Simplified Summary: Explain the judgment in layman's terms."
                     },
                     {
                         "role": "user",
-                        "content": f"""Summarize the following Indian legal judgment in two parts:
-
-1. Legal Summary (for lawyers/law students)
-2. Simplified Summary (easy for common people)
-
-Judgment:
-{user_input}
-"""
+                        "content": user_input
                     }
                 ]
             }
 
             try:
-                response = requests.post(
-                    "https://openrouter.ai/api/v1/chat/completions",
-                    headers=headers,
-                    json=data
-                )
+                response = requests.post(url, headers=headers, json=data)
                 response.raise_for_status()
                 result = response.json()
-                summary = result["choices"][0]["message"]["content"]
-                st.success("Summary generated successfully!")
-                st.markdown(summary)
+
+                output = result["choices"][0]["message"]["content"]
+                st.success("✅ Summary generated successfully:")
+                st.markdown(output)
 
             except requests.exceptions.RequestException as e:
-                st.error("❌ API request failed. Please check your internet or OpenRouter key.")
+                st.error("❌ API request failed. Please check your OpenRouter key or request format.")
                 st.exception(e)
