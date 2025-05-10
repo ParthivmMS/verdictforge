@@ -1,11 +1,21 @@
 import streamlit as st
 import requests
+import os
 
-st.title("⚖️ VerdictForge - Legal Judgment Summarizer")
-st.markdown("Paste a court judgment below. We'll generate a short summary using Mistral.")
+st.set_page_config(page_title="⚖️ VerdictForge - Legal Judgment Summarizer")
 
+# UI
+st.title("⚖️ VerdictForge")
+st.markdown("Paste a court judgment below to get a **precise 2–3 line summary**.")
+
+# Input box
+text = st.text_area("📄 Paste the judgment here", height=300)
+
+# OpenRouter API Key (stored securely in secrets)
 API_KEY = st.secrets["OPENROUTER_API_KEY"]
-API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+# Define Mistral API endpoint
+url = "https://openrouter.ai/api/v1/chat/completions"
 
 headers = {
     "Authorization": f"Bearer {API_KEY}",
@@ -16,28 +26,34 @@ def get_summary(text):
     payload = {
         "model": "mistralai/mistral-7b-instruct",
         "messages": [
-            {"role": "system", "content": "You are a legal expert who summarizes court judgments into 2–3 clear lines."},
-            {"role": "user", "content": f"Summarize this legal judgment:\n\n{text}"}
-        ],
-        "temperature": 0.5,
-        "max_tokens": 300
+            {
+                "role": "system",
+                "content": (
+                    "You are a legal summarization assistant. Summarize Indian court judgments in **2–3 concise lines**, "
+                    "highlighting only the final legal conclusion, outcome, or direction by the court. Do not repeat sentences. "
+                    "Make it sharp and legally relevant."
+                )
+            },
+            {
+                "role": "user",
+                "content": f"Summarize the following legal judgment:\n\n{text.strip()}"
+            }
+        ]
     }
 
-    response = requests.post(API_URL, headers=headers, json=payload)
-    if response.status_code == 200:
-        return response.json()["choices"][0]["message"]["content"]
-    else:
-        st.error(f"Error {response.status_code}: {response.text}")
-        return None
+    response = requests.post(url, headers=headers, json=payload)
+    response.raise_for_status()
+    return response.json()["choices"][0]["message"]["content"]
 
-judgment = st.text_area("📜 Paste your judgment here", height=300)
-
+# Button to generate summary
 if st.button("🧠 Generate Summary"):
-    if judgment.strip():
-        st.info("Summarizing... please wait.")
-        summary = get_summary(judgment)
-        if summary:
-            st.success("✅ Summary:")
-            st.write(summary)
+    if not text.strip():
+        st.warning("Please paste a judgment.")
     else:
-        st.warning("Please enter some text.")
+        with st.spinner("Summarizing... please wait."):
+            try:
+                summary = get_summary(text)
+                st.success("✅ Summary:")
+                st.write(summary)
+            except Exception as e:
+                st.error(f"❌ Error: {str(e)}")
