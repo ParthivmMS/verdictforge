@@ -17,7 +17,7 @@ if st.button("🧠 Generate Summary"):
         with st.spinner("Summarizing..."):
             try:
                 # Load key from Streamlit secrets
-                api_key = st.secrets["api_keys"]["openrouter_key"]
+                api_key = st.secrets["openrouter_key"]
 
                 # Send request to OpenRouter
                 url = "https://openrouter.ai/api/v1/chat/completions"
