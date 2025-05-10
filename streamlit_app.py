@@ -1,51 +1,60 @@
 import streamlit as st
 import requests
+import json
 
-st.set_page_config(page_title="VerdictForge", layout="wide")
-st.title("⚖️ VerdictForge: Legal Judgment Summarizer")
+st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
+st.title("⚖️ VerdictForge")
+st.subheader("AI-Powered Indian Legal Judgment Summarizer")
 
-# Get the API key securely
-api_key = st.secrets["OPENROUTER_API_KEY"]
+# Sidebar info
+st.sidebar.title("Navigation")
+st.sidebar.info("This tool summarizes Indian legal judgments into professional and simplified formats.")
 
-# Input
-user_input = st.text_area("Paste your legal judgment:", height=300)
+# Input field for judgment text
+judgment_text = st.text_area("📜 Paste a legal judgment below:", height=300, placeholder="Enter full judgment text here...")
 
-# On click
-if st.button("Generate Summary"):
-    if not user_input.strip():
-        st.warning("Please enter a legal judgment.")
+# API Key and endpoint
+OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
+API_URL = "https://openrouter.ai/api/v1/chat/completions"
+HEADERS = {
+    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+    "Content-Type": "application/json"
+}
+
+# Prompt template
+SYSTEM_PROMPT = (
+    "You are a senior legal associate in an Indian law firm. "
+    "Your job is to read a full legal judgment and output a detailed legal summary followed by a simplified explanation in plain English. "
+    "Ensure your summary is relevant, captures the legal issue, judgment, reasoning, and applicable principles."
+)
+
+# Generate summary
+if st.button("⚡ Generate Summary"):
+    if not judgment_text.strip():
+        st.warning("Please paste a legal judgment to generate a summary.")
     else:
-        with st.spinner("Summarizing..."):
-            url = "https://openrouter.ai/api/v1/chat/completions"
-
-            headers = {
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json"
-            }
-
-            data = {
-                "model": "openai/gpt-3.5-turbo",
-                "messages": [
-                    {
-                        "role": "system",
-                        "content": "You are a legal assistant AI. Provide a two-part output:\n\n1. Legal Summary: Summarize the judgment in a professional tone suitable for legal professionals.\n2. Simplified Summary: Explain the judgment in layman's terms."
-                    },
-                    {
-                        "role": "user",
-                        "content": user_input
-                    }
-                ]
-            }
-
+        with st.spinner("Analyzing judgment and generating summary..."):
             try:
-                response = requests.post(url, headers=headers, json=data)
+                payload = {
+                    "model": "mistralai/mistral-7b-instruct:free",
+                    "messages": [
+                        {"role": "system", "content": SYSTEM_PROMPT},
+                        {"role": "user", "content": judgment_text}
+                    ]
+                }
+                response = requests.post(API_URL, headers=HEADERS, data=json.dumps(payload))
                 response.raise_for_status()
                 result = response.json()
 
-                output = result["choices"][0]["message"]["content"]
+                ai_reply = result['choices'][0]['message']['content']
+
                 st.success("✅ Summary generated successfully:")
-                st.markdown(output)
+                st.markdown(ai_reply)
 
             except requests.exceptions.RequestException as e:
-                st.error("❌ API request failed. Please check your OpenRouter key or request format.")
+                st.error("❌ API request failed. Please check your internet or OpenRouter key.")
                 st.exception(e)
+
+# Footer
+st.markdown("---")
+st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
