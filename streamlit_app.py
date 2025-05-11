@@ -2,6 +2,20 @@ import streamlit as st
 import requests
 import json
 
+st.markdown("""
+<!-- SEO Meta Tags -->
+<meta name="title" content="VerdictForge - AI Legal Judgment Summarizer">
+<meta name="description" content="Summarize Indian court judgments using AI. Built for law students, legal researchers, and professionals.">
+<meta name="keywords" content="AI Legal Summarizer, Indian Court Judgments, Case Summary, Law AI, Legal Tech India">
+<meta name="author" content="VerdictForge by Parthiv M S">
+<meta property="og:title" content="VerdictForge - Legal Judgment Summarizer" />
+<meta property="og:description" content="Summarize Indian legal judgments in seconds with our AI-powered tool." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://verdictforge-uaaxxcnwqfhbk73s28gjl4.streamlit.app/" />
+<meta property="og:image" content="https://verdictforge-uaaxxcnwqfhbk73s28gjl4.streamlit.app/favicon.png" />
+""", unsafe_allow_html=True)
+
+
 st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
 
 # Sidebar navigation
