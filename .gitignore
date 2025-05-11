@@ -1,0 +1,30 @@
+# Ignore movie files and large media
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore cache and hidden folders
+__pycache__/
+*.pyc
+
+# Ignore environment files
+.env
+
+# Ignore large output files
+*.zip
+*.tar.gz
+*.rar
+
+# Ignore duplicates and unwanted files
+about page - Copy.html
+privacypolicy - Copy.html
+allfiles.*
+*.txt
+*.ps1
+* - Copy.*
+requirements - Copy.txt
