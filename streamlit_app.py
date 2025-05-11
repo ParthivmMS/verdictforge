@@ -2,6 +2,8 @@ import streamlit as st
 import requests
 import json
 
+st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
+
 st.markdown("""
 <!-- SEO Meta Tags -->
 <meta name="title" content="VerdictForge - AI Legal Judgment Summarizer">
@@ -14,9 +16,6 @@ st.markdown("""
 <meta property="og:url" content="https://verdictforge-uaaxxcnwqfhbk73s28gjl4.streamlit.app/" />
 <meta property="og:image" content="https://verdictforge-uaaxxcnwqfhbk73s28gjl4.streamlit.app/favicon.png" />
 """, unsafe_allow_html=True)
-
-
-st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
 
 # Sidebar navigation
 choice = st.sidebar.radio("Navigate", ["Summarizer", "Privacy Policy", "About This Website"])
