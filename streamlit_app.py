@@ -114,27 +114,78 @@ elif menu == "About This Website":
 
 # --- Blog Section ---
 elif menu == "Blog":
-    st.title("Blog")
-    st.header("Blog 1: Why I Built an AI Legal Summarizer as a Law Student in India")
+    blog_choice = st.sidebar.radio("Blog Posts", [
+        "Why I Built an AI Legal Summarizer",
+        "How AI Can Save Hours of Legal Research"
+    ])
 
-    st.markdown("""
-    In my first year at a government law college, I faced a problem that many students silently struggle with — judgment fatigue.  
-    Long, dense court decisions that took hours to read. Confusing legal jargon. No one to explain it simply.
+    if blog_choice == "Why I Built an AI Legal Summarizer":
+        st.title("Blog 1: Why I Built an AI Legal Summarizer as a Law Student in India")
+        st.markdown("""
+        In my first year at a government law college, I faced a problem that many students silently struggle with — judgment fatigue.  
+        Long, dense court decisions that took hours to read. Confusing legal jargon. No one to explain it simply.
 
-    I thought, what if I could build something that explains these judgments like a senior — clearly, briefly, and usefully?
+        I thought, what if I could build something that explains these judgments like a senior — clearly, briefly, and usefully?
 
-    That’s how **VerdictForge** was born.
+        That’s how **VerdictForge** was born.
 
-    With no tech background, I used AI (Mistral via OpenRouter) and Streamlit to build a tool that:
-    - Breaks down judgments into simplified summaries
-    - Highlights legal issues, reasoning, and decisions
-    - Provides both legal and plain English explanations
+        With no tech background, I used AI (Mistral via OpenRouter) and Streamlit to build a tool that:
+        - Breaks down judgments into simplified summaries
+        - Highlights legal issues, reasoning, and decisions
+        - Provides both legal and plain English explanations
 
-    This isn’t just a summarizer. It’s a study companion, a research accelerator, and a time-saver.
+        This isn’t just a summarizer. It’s a study companion, a research accelerator, and a time-saver.
 
-    My vision is to grow VerdictForge into a full legal AI assistant — helping students, lawyers, and law firms across India.
+        My vision is to grow VerdictForge into a full legal AI assistant — helping students, lawyers, and law firms across India.
 
-    If you're reading this, you're part of that journey. Let’s reshape legal education together.
-    """)
-    st.markdown("---")
-    st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
+        If you're reading this, you're part of that journey. Let’s reshape legal education together.
+
+        ---
+        Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)
+        """)
+
+    elif blog_choice == "How AI Can Save Hours of Legal Research":
+        st.title("Blog 2: How AI Can Save Hours of Legal Research for Law Students and Lawyers")
+        st.markdown("""
+        **“Sir, it took me 6 hours to go through the entire judgment. I couldn’t even finish my notes.”**
+
+        If you’re a law student or junior associate in India, this probably sounds familiar. Long judgments. Tough English. Dozens of citations. And deadlines always lurking.
+
+        In traditional legal research, it takes **hours** to skim through dense court rulings, extract key points, and rewrite them in a presentable format. Worse, this time crunch leads to **incomplete understanding**, rushed briefs, and **burnout**.
+
+        ### What If You Could Do This in Minutes?
+
+        That’s exactly what VerdictForge was built for.
+
+        VerdictForge is an AI-powered legal judgment summarizer that does the heavy lifting for you. Instead of reading every page manually, you paste the judgment—and **get an instant summary** with the:
+
+        - Case facts  
+        - Legal issues  
+        - Reasoning  
+        - Final decision  
+        - Easy-to-understand takeaway
+
+        This means:
+        - Law students save hours of note-taking during exams.
+        - Advocates can prep for arguments faster.
+        - Law firms boost research efficiency.
+
+        ### A Real-Life Use Case:
+
+        A student from a government law college preparing for his intern presentation pasted a 5-page SC judgment into VerdictForge. The tool gave him a **clear, concise** 3-paragraph summary in under 10 seconds.
+
+        He impressed his senior advocate—and understood the case better.
+
+        ### Why This Matters
+
+        In the AI age, time is your biggest asset. Legal research doesn't need to feel like punishment. Whether you’re preparing for moot court, working on a case brief, or revising for exams, VerdictForge is your **24x7 legal assistant**.
+
+        ### Final Thought
+
+        Smart students don’t work harder—they use smarter tools.
+
+        If you're still manually breaking down judgments, you’re wasting precious time. Try VerdictForge today and **let AI do the heavy lifting**—so you can focus on learning, arguing, and winning.
+
+        ---
+        Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)
+        """)
