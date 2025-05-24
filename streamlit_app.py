@@ -2,6 +2,9 @@ import streamlit as st
 import requests
 import json
 
+# --- Page Setup ---
+st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
+
 # --- SEO Meta Tags ---
 st.markdown("""
 <!-- SEO Meta Tags -->
@@ -16,8 +19,7 @@ st.markdown("""
 <meta property="og:image" content="https://verdictforge.in/favicon.png" />
 """, unsafe_allow_html=True)
 
-# --- Page Setup ---
-st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
+
 
 # --- Sidebar Menu ---
 menu = st.sidebar.radio("Navigate", ["Summarizer", "Privacy Policy", "About This Website", "Blog"])
