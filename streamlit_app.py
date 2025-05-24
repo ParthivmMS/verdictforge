@@ -2,9 +2,7 @@ import streamlit as st
 import requests
 import json
 
-st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
-
-# Inject SEO Meta Tags
+# --- SEO Meta Tags ---
 st.markdown("""
 <!-- SEO Meta Tags -->
 <meta name="title" content="VerdictForge - AI Legal Judgment Summarizer">
@@ -14,20 +12,18 @@ st.markdown("""
 <meta property="og:title" content="VerdictForge - Legal Judgment Summarizer" />
 <meta property="og:description" content="Summarize Indian legal judgments in seconds with our AI-powered tool." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://verdictforge-uaaxxcnwqfhbk73s28gjl4.streamlit.app/" />
-<meta property="og:image" content="https://verdictforge-uaaxxcnwqfhbk73s28gjl4.streamlit.app/favicon.png" />
+<meta property="og:url" content="https://verdictforge.in/" />
+<meta property="og:image" content="https://verdictforge.in/favicon.png" />
 """, unsafe_allow_html=True)
 
-# Updated sidebar
-choice = st.sidebar.radio("Navigate", [
-    "Summarizer", 
-    "Privacy Policy", 
-    "About This Website", 
-    "Blogs"
-])
+# --- Page Setup ---
+st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
 
-# ========== Summarizer ==========
-if choice == "Summarizer":
+# --- Sidebar Menu ---
+menu = st.sidebar.radio("Navigate", ["Summarizer", "Privacy Policy", "About This Website", "Blog"])
+
+# --- Summarizer Section ---
+if menu == "Summarizer":
     st.title("⚖️ VerdictForge")
     st.subheader("AI-Powered Indian Legal Judgment Summarizer")
 
@@ -66,7 +62,6 @@ if choice == "Summarizer":
                     result = response.json()
                     ai_reply = result['choices'][0]['message']['content']
                     summary_text = ai_reply
-
                     st.success("✅ Summary generated successfully:")
                     st.markdown(ai_reply)
                 except requests.exceptions.RequestException as e:
@@ -84,8 +79,8 @@ if choice == "Summarizer":
     st.markdown("---")
     st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
 
-# ========== Privacy Policy ==========
-elif choice == "Privacy Policy":
+# --- Privacy Policy Section ---
+elif menu == "Privacy Policy":
     st.title("Privacy Policy")
     st.markdown("""
     **Effective Date:** May 11, 2025
@@ -97,8 +92,8 @@ elif choice == "Privacy Policy":
     st.markdown("---")
     st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
 
-# ========== About ==========
-elif choice == "About This Website":
+# --- About Page Section ---
+elif menu == "About This Website":
     st.title("About This Website")
     st.markdown("""
     **VerdictForge** is an AI-powered legal judgment summarization tool designed 
@@ -115,25 +110,29 @@ elif choice == "About This Website":
     st.markdown("---")
     st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
 
-# ========== Blogs ==========
-elif choice == "Blogs":
-    st.title("📚 Legal Insights & Blogs")
-    
-    st.header("1. Why Every Law Student Needs Judgment Summaries")
-    st.markdown("""
-    Understanding lengthy judgments is one of the biggest challenges for Indian law students.
-    Our AI tool converts 10-page verdicts into 10-second insights — perfect for last-minute revisions and better comprehension.
-    """)
+# --- Blog Section ---
+elif menu == "Blog":
+    st.title("Blog")
+    st.header("Blog 1: Why I Built an AI Legal Summarizer as a Law Student in India")
 
-    st.header("2. The Future of Legal Research is AI-Powered")
     st.markdown("""
-    Manual legal research takes hours. With AI like VerdictForge, legal professionals can instantly summarize judgments, boosting productivity and client value.
-    """)
+    In my first year at a government law college, I faced a problem that many students silently struggle with — judgment fatigue.  
+    Long, dense court decisions that took hours to read. Confusing legal jargon. No one to explain it simply.
 
-    st.header("3. How VerdictForge is Helping Non-NLU Students Compete with Top Law Schools")
-    st.markdown("""
-    Students from government colleges often lack elite exposure. VerdictForge levels the playing field by giving every law student quick access to case summaries and analysis tools.
-    """)
+    I thought, what if I could build something that explains these judgments like a senior — clearly, briefly, and usefully?
 
+    That’s how **VerdictForge** was born.
+
+    With no tech background, I used AI (Mistral via OpenRouter) and Streamlit to build a tool that:
+    - Breaks down judgments into simplified summaries
+    - Highlights legal issues, reasoning, and decisions
+    - Provides both legal and plain English explanations
+
+    This isn’t just a summarizer. It’s a study companion, a research accelerator, and a time-saver.
+
+    My vision is to grow VerdictForge into a full legal AI assistant — helping students, lawyers, and law firms across India.
+
+    If you're reading this, you're part of that journey. Let’s reshape legal education together.
+    """)
     st.markdown("---")
     st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
