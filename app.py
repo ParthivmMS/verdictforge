@@ -31,8 +31,15 @@ if menu == "Summarizer":
 
     judgment_text = st.text_area("📜 Paste a legal judgment below:", height=300, placeholder="Enter full judgment text here...")
 
-    secrets = toml.load("secrets.toml")
-OPENROUTER_API_KEY = secrets["OPENROUTER_API_KEY"]
+    try:
+    secrets_path = ".streamlit/secrets.toml"
+    if os.path.exists(secrets_path):
+        secrets = toml.load(secrets_path)
+        OPENROUTER_API_KEY = secrets["OPENROUTER_API_KEY"]
+    else:
+        OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+except Exception as e:
+    OPENROUTER_API_KEY = None
 
     SYSTEM_PROMPT = (
         "You are a senior legal associate in an Indian law firm. "
