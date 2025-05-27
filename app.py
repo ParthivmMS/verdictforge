@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import json
+import os
 
 # --- Page Setup ---
 st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
