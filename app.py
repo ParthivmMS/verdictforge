@@ -1,7 +1,8 @@
-import streamlit as st
+import streamlit
 import requests
 import json
 import os  # Correctly placed here
+import toml
 
 # --- Page Config ---
 st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
@@ -30,12 +31,8 @@ if menu == "Summarizer":
 
     judgment_text = st.text_area("📜 Paste a legal judgment below:", height=300, placeholder="Enter full judgment text here...")
 
-    OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
-    API_URL = "https://openrouter.ai/api/v1/chat/completions"
-    HEADERS = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json"
-    }
+    secrets = toml.load("secrets.toml")
+OPENROUTER_API_KEY = secrets["OPENROUTER_API_KEY"]
 
     SYSTEM_PROMPT = (
         "You are a senior legal associate in an Indian law firm. "
