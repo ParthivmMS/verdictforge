@@ -188,4 +188,4 @@ elif menu == "Blog":
         """)
 
     st.markdown("---")
-    st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
+    st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/ParthivmMS)")
