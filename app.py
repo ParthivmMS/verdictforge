@@ -1,10 +1,9 @@
-import streamlit
+import streamlit as st
 import requests
 import json
-import os  # Correctly placed here
-import toml
+import os
 
-# --- Page Config ---
+# --- Page Setup ---
 st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
 
 # --- SEO Meta Tags ---
@@ -24,22 +23,20 @@ st.markdown("""
 # --- Sidebar Menu ---
 menu = st.sidebar.radio("Navigate", ["Summarizer", "Privacy Policy", "About This Website", "Blog"])
 
-# --- Summarizer Page ---
+# --- Summarizer Section ---
 if menu == "Summarizer":
     st.title("⚖️ VerdictForge")
     st.subheader("AI-Powered Indian Legal Judgment Summarizer")
 
     judgment_text = st.text_area("📜 Paste a legal judgment below:", height=300, placeholder="Enter full judgment text here...")
 
-    try:
-    secrets_path = ".streamlit/secrets.toml"
-    if os.path.exists(secrets_path):
-        secrets = toml.load(secrets_path)
-        OPENROUTER_API_KEY = secrets["OPENROUTER_API_KEY"]
-    else:
-        OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-except Exception as e:
-    OPENROUTER_API_KEY = None
+    OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
+
+    API_URL = "https://openrouter.ai/api/v1/chat/completions"
+    HEADERS = {
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Content-Type": "application/json"
+    }
 
     SYSTEM_PROMPT = (
         "You are a senior legal associate in an Indian law firm. "
@@ -67,10 +64,8 @@ except Exception as e:
                     result = response.json()
                     ai_reply = result['choices'][0]['message']['content']
                     summary_text = ai_reply
-
                     st.success("✅ Summary generated successfully:")
                     st.markdown(ai_reply)
-
                 except requests.exceptions.RequestException as e:
                     st.error("❌ API request failed. Please check your internet or OpenRouter key.")
                     st.exception(e)
@@ -86,7 +81,7 @@ except Exception as e:
     st.markdown("---")
     st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
 
-# --- Privacy Policy Page ---
+# --- Privacy Policy Section ---
 elif menu == "Privacy Policy":
     st.title("Privacy Policy")
     st.markdown("""
@@ -99,7 +94,7 @@ elif menu == "Privacy Policy":
     st.markdown("---")
     st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
 
-# --- About Page ---
+# --- About Page Section ---
 elif menu == "About This Website":
     st.title("About This Website")
     st.markdown("""
@@ -117,28 +112,80 @@ elif menu == "About This Website":
     st.markdown("---")
     st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
 
-# --- Blog Page ---
+# --- Blog Section ---
 elif menu == "Blog":
-    st.title("Blog")
-    st.header("Blog 1: Why I Built an AI Legal Summarizer as a Law Student in India")
-    st.markdown("""
-    In my first year at a government law college, I faced a problem that many students silently struggle with — judgment fatigue.  
-    Long, dense court decisions that took hours to read. Confusing legal jargon. No one to explain it simply.
+    st.title("📚 Blog")
 
-    I thought, what if I could build something that explains these judgments like a senior — clearly, briefly, and usefully?
+    blog_option = st.selectbox("Choose a blog to read:", [
+        "Blog 1: Why I Built an AI Legal Summarizer as a Law Student in India",
+        "Blog 2: The Invisible Burden of Reading Legal Judgments",
+        "Blog 3: How AI Can Help Law Students From Non-NLU Colleges"
+    ])
 
-    That’s how **VerdictForge** was born.
+    if blog_option == "Blog 1: Why I Built an AI Legal Summarizer as a Law Student in India":
+        st.header(blog_option)
+        st.markdown("""
+        In my first year at a government law college, I faced a problem that many students silently struggle with — judgment fatigue.  
+        Long, dense court decisions that took hours to read. Confusing legal jargon. No one to explain it simply.
 
-    With no tech background, I used AI (Mistral via OpenRouter) and Streamlit to build a tool that:
-    - Breaks down judgments into simplified summaries
-    - Highlights legal issues, reasoning, and decisions
-    - Provides both legal and plain English explanations
+        I thought, what if I could build something that explains these judgments like a senior — clearly, briefly, and usefully?
 
-    This isn’t just a summarizer. It’s a study companion, a research accelerator, and a time-saver.
+        That’s how **VerdictForge** was born.
 
-    My vision is to grow VerdictForge into a full legal AI assistant — helping students, lawyers, and law firms across India.
+        With no tech background, I used AI (Mistral via OpenRouter) and Streamlit to build a tool that:
+        - Breaks down judgments into simplified summaries
+        - Highlights legal issues, reasoning, and decisions
+        - Provides both legal and plain English explanations
 
-    If you're reading this, you're part of that journey. Let’s reshape legal education together.
-    """)
+        This isn’t just a summarizer. It’s a study companion, a research accelerator, and a time-saver.
+
+        My vision is to grow VerdictForge into a full legal AI assistant — helping students, lawyers, and law firms across India.
+
+        If you're reading this, you're part of that journey. Let’s reshape legal education together.
+        """)
+
+    elif blog_option == "Blog 2: The Invisible Burden of Reading Legal Judgments":
+        st.header(blog_option)
+        st.markdown("""
+        For years, law students and junior advocates have struggled through endless pages of judgments.
+
+        We copy-paste from SCC Online, Manupatra, or court websites… then read… re-read… summarize by hand.
+
+        It’s exhausting.
+
+        While legal knowledge is essential, the system makes it inefficient. Reading judgments should feel like gaining insight — not surviving a punishment.
+
+        That’s where AI comes in. At **VerdictForge**, we’re not replacing lawyers. We’re removing the friction between you and legal understanding.
+
+        Think of us as your personal legal intern who reads fast, writes crisply, and never complains.
+
+        With every summary we generate, we’re giving time back to law students, researchers, and overworked professionals.
+
+        This is legal productivity — built for India.
+        """)
+
+    elif blog_option == "Blog 3: How AI Can Help Law Students From Non-NLU Colleges":
+        st.header(blog_option)
+        st.markdown("""
+        Let’s face it: the legal world in India is deeply tiered.
+
+        National Law University (NLU) students often get better internships, more exposure, and stronger networks.  
+        But what about the rest of us?
+
+        I study in a government law college. I don’t have the alumni power or firm contacts. But I have one edge — **technology**.
+
+        With tools like VerdictForge, any law student can:
+        - Read judgments faster
+        - Understand complex decisions in plain English
+        - Save time for internships, moots, and writing
+
+        AI doesn’t care where you study. It levels the playing field.
+
+        My dream is to make legal tech accessible to every student — especially from non-NLU backgrounds.  
+        If we use AI smartly, we can stand out based on skill — not brand.
+
+        And that’s exactly what VerdictForge is for.
+        """)
+
     st.markdown("---")
     st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
