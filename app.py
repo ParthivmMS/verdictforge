@@ -123,7 +123,8 @@ elif menu == "Blog":
     ])
 
     if blog_option == "Blog 1: Why I Built an AI Legal Summarizer as a Law Student in India":
-        st.header("Why I Built an AI Legal Summarizer as a Law Student in India")
+        st.header("Why I Built VerdictForge — An AI Legal Summarizer for Indian Law Students")
+        st.markdown("*VerdictForge simplifies Indian court judgments using AI-powered legal and plain English summaries. Built by a first-year law student for students and researchers across India.*")
         st.markdown("### 🧠 The Problem: Judgment Fatigue in Indian Law Colleges")
         st.markdown("""
         In my first year at a government law college, I struggled with what many students silently face — **judgment fatigue**.  
@@ -173,7 +174,8 @@ elif menu == "Blog":
         """)
 
     elif blog_option == "Blog 2: The Invisible Burden of Reading Legal Judgments":
-        st.header("The Invisible Burden of Reading Legal Judgments")
+        st.header("The Invisible Burden of Reading Indian Judgments — And How AI Can Help")
+        st.markdown("*Law students spend hours struggling through dense court decisions. Learn how VerdictForge removes that pain with fast, AI-powered legal summaries.*")
         st.markdown("### 📚 Reading vs. Understanding: The Student’s Struggle")
         st.markdown("""
         Law students and junior advocates often drown in pages of judgments.  
@@ -207,7 +209,8 @@ elif menu == "Blog":
         """)
 
     elif blog_option == "Blog 3: How AI Can Help Law Students From Non-NLU Colleges":
-        st.header("How AI Can Help Law Students From Non-NLU Colleges")
+        st.header("How AI Can Empower Law Students from Non-NLU Colleges in India")
+        st.markdown("*Not from an NLU? No problem. Discover how VerdictForge helps students from government and private law colleges compete through smart legal tech.*")
         st.markdown("### 🎓 The Legal Divide in India")
         st.markdown("""
         Let’s be real — the Indian legal world is tiered.
