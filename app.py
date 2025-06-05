@@ -123,69 +123,122 @@ elif menu == "Blog":
     ])
 
     if blog_option == "Blog 1: Why I Built an AI Legal Summarizer as a Law Student in India":
-        st.header(blog_option)
+        st.header("Why I Built an AI Legal Summarizer as a Law Student in India")
+        st.markdown("### 🧠 The Problem: Judgment Fatigue in Indian Law Colleges")
         st.markdown("""
-        In my first year at a government law college, I faced a problem that many students silently struggle with — judgment fatigue.  
-        Long, dense court decisions that took hours to read. Confusing legal jargon. No one to explain it simply.
+        In my first year at a government law college, I struggled with what many students silently face — **judgment fatigue**.  
+        Long, complex court decisions with confusing legal jargon. Hours spent reading just to understand one case.
 
-        I thought, what if I could build something that explains these judgments like a senior — clearly, briefly, and usefully?
+        As a law student from a non-NLU college, I didn’t have seniors to guide me or law firm mentors to help. But I had one edge — curiosity.
+        """)
+
+        st.markdown("### ⚙️ The Idea: Can AI Help Us Understand Judgments Faster?")
+        st.markdown("""
+        I asked myself: *What if an AI tool could explain judgments like a senior advocate — clearly, briefly, and usefully?*
 
         That’s how **VerdictForge** was born.
 
-        With no tech background, I used AI (Mistral via OpenRouter) and Streamlit to build a tool that:
-        - Breaks down judgments into simplified summaries
-        - Highlights legal issues, reasoning, and decisions
-        - Provides both legal and plain English explanations
+        Even without a tech background, I built it using:
+        - **Streamlit** for UI
+        - **Mistral-7B via OpenRouter** for summarization
 
-        This isn’t just a summarizer. It’s a study companion, a research accelerator, and a time-saver.
+        VerdictForge:
+        - Breaks down court decisions into **crisp legal summaries**
+        - Gives **plain English explanations**
+        - Focuses specifically on **Indian judgments**
+        """)
 
-        My vision is to grow VerdictForge into a full legal AI assistant — helping students, lawyers, and law firms across India.
+        st.markdown("### 🚀 Why This Matters for Law Students")
+        st.markdown("""
+        Most legal tech tools are built for lawyers, not students. But we need it the most.
 
-        If you're reading this, you're part of that journey. Let’s reshape legal education together.
+        VerdictForge is:
+        - A **study companion** for exams
+        - A **research booster** for moots and internships
+        - A **time-saver** for anyone reading judgments
+
+        It's especially designed for **students from non-NLU backgrounds** — to level the playing field with AI.
+        """)
+
+        st.markdown("### 🌱 What’s Next")
+        st.markdown("""
+        I want to grow VerdictForge into a full legal assistant:
+        - Auto-detect legal issues
+        - Extract citations
+        - Support regional languages
+
+        If you’re a student, intern, or junior associate, I built this for you.
+
+        👉 Let’s reshape legal education in India — with tech.
         """)
 
     elif blog_option == "Blog 2: The Invisible Burden of Reading Legal Judgments":
-        st.header(blog_option)
+        st.header("The Invisible Burden of Reading Legal Judgments")
+        st.markdown("### 📚 Reading vs. Understanding: The Student’s Struggle")
         st.markdown("""
-        For years, law students and junior advocates have struggled through endless pages of judgments.
-
+        Law students and junior advocates often drown in pages of judgments.  
         We copy-paste from SCC Online, Manupatra, or court websites… then read… re-read… summarize by hand.
 
-        It’s exhausting.
+        It’s exhausting. We lose hours each day on something that should be simple.
+        """)
 
-        While legal knowledge is essential, the system makes it inefficient. Reading judgments should feel like gaining insight — not surviving a punishment.
+        st.markdown("### ⚖️ Why the System Feels Broken")
+        st.markdown("""
+        Legal research should feel like gaining insight — not surviving a punishment.  
+        But instead of teaching us how to understand, the system trains us to just “get through it.”
 
-        That’s where AI comes in. At **VerdictForge**, we’re not replacing lawyers. We’re removing the friction between you and legal understanding.
+        This isn’t efficiency. It’s burnout.
+        """)
 
-        Think of us as your personal legal intern who reads fast, writes crisply, and never complains.
+        st.markdown("### 🤖 How AI Solves the Friction")
+        st.markdown("""
+        That’s where **VerdictForge** comes in.
 
-        With every summary we generate, we’re giving time back to law students, researchers, and overworked professionals.
+        We’re not replacing lawyers — we’re removing friction. Think of VerdictForge as:
+        - A personal legal intern who never gets tired
+        - Someone who reads fast, summarizes crisply, and simplifies legal jargon
 
-        This is legal productivity — built for India.
+        With every summary, we give time back to:
+        - Law students preparing for exams
+        - Interns handling case research
+        - Professionals managing court loads
+
+        ⚡ This is legal productivity — built for India.
         """)
 
     elif blog_option == "Blog 3: How AI Can Help Law Students From Non-NLU Colleges":
-        st.header(blog_option)
+        st.header("How AI Can Help Law Students From Non-NLU Colleges")
+        st.markdown("### 🎓 The Legal Divide in India")
         st.markdown("""
-        Let’s face it: the legal world in India is deeply tiered.
+        Let’s be real — the Indian legal world is tiered.
 
-        National Law University (NLU) students often get better internships, more exposure, and stronger networks.  
-        But what about the rest of us?
+        NLU students get better internships, more exposure, and stronger networks.  
+        But what about students from government or private colleges?
 
-        I study in a government law college. I don’t have the alumni power or firm contacts. But I have one edge — **technology**.
+        We’re often left behind. Not due to skill — but lack of access.
+        """)
+
+        st.markdown("### 💡 The Power of AI as an Equalizer")
+        st.markdown("""
+        I study in a government law college. I don’t have alumni power or firm connections.  
+        But I discovered something powerful — **technology**.
 
         With tools like VerdictForge, any law student can:
         - Read judgments faster
         - Understand complex decisions in plain English
         - Save time for internships, moots, and writing
 
-        AI doesn’t care where you study. It levels the playing field.
+        AI doesn’t care where you study — it **levels the field**.
+        """)
 
-        My dream is to make legal tech accessible to every student — especially from non-NLU backgrounds.  
-        If we use AI smartly, we can stand out based on skill — not brand.
+        st.markdown("### 🔮 Building for the Forgotten Majority")
+        st.markdown("""
+        VerdictForge is not just a tool. It’s a rebellion — against the idea that only elite law schools deserve support.
 
-        And that’s exactly what VerdictForge is for.
+        My dream is to make legal tech accessible to **every Indian law student**, especially from non-NLU backgrounds.
+
+        If we use AI smartly, we can rise based on **skill — not brand**.
         """)
 
     st.markdown("---")
-    st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/ParthivmMS)")
+    st.markdown("Made with ❤ by Parthiv | [GitHub](https://github.com/ParthivmMS)")
