@@ -20,6 +20,13 @@ st.markdown("""
 <meta property="og:image" content="https://verdictforge.in/favicon.png" />
 """, unsafe_allow_html=True)
 
+# --- Google AdSense ---
+st.markdown("""
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1762689473102041"
+     crossorigin="anonymous"></script>
+""", unsafe_allow_html=True)
+
 # --- Sidebar Menu ---
 menu = st.sidebar.radio("Navigate", ["Summarizer", "Privacy Policy", "About This Website", "Blog"])
 
