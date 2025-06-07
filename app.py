@@ -7,21 +7,21 @@ import os
 # --- Page Setup ---
 st.set_page_config(
     page_title="VerdictForge – Legal Judgment Summarizer",
-    page_icon="favicon.png",  # This is fallback; we force it manually below too
+    page_icon="favicon.png",  # fallback only
     layout="wide"
 )
 
-# --- Force favicon and title manually (works on Render + Streamlit) ---
+# --- Manual Favicon + Title Injection (Streamlit + Render compatible) ---
 components.html("""
 <head>
-  <link rel="icon" href="https://verdictforge.onrender.com/favicon.png" type="image/png">
+  <link rel="icon" href="https://raw.githubusercontent.com/ParthivmMS/verdictforge/main/favicon.png" type="image/png">
   <script>
     document.title = "VerdictForge – Indian Legal Judgment Summarizer";
   </script>
 </head>
 """, height=0)
 
-# --- SEO Meta Tags for Google and social preview ---
+# --- SEO Meta Tags for Google + Social Preview ---
 st.markdown("""
 <!-- SEO Meta Tags -->
 <meta name="title" content="VerdictForge – AI Legal Judgment Summarizer">
@@ -32,10 +32,10 @@ st.markdown("""
 <meta property="og:description" content="Summarize Indian legal judgments in seconds with our AI-powered tool." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://verdictforge.in/" />
-<meta property="og:image" content="https://verdictforge.in/favicon.png" />
+<meta property="og:image" content="https://raw.githubusercontent.com/ParthivmMS/verdictforge/main/favicon.png" />
 """, unsafe_allow_html=True)
 
-# --- Google AdSense Verification ---
+# --- Google AdSense Script ---
 st.markdown("""
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1762689473102041"
