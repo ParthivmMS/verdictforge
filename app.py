@@ -7,36 +7,35 @@ import os
 # --- Page Setup ---
 st.set_page_config(
     page_title="VerdictForge – Legal Judgment Summarizer",
-    page_icon="favicon.png",  # Make sure this file exists in your repo
+    page_icon="favicon.png",  # This is fallback; we force it manually below too
     layout="wide"
 )
 
-# --- SEO Fix for Google Preview ---
+# --- Force favicon and title manually (works on Render + Streamlit) ---
 components.html("""
 <head>
-  <title>VerdictForge – Indian Legal Judgment Summarizer</title>
-  <meta name="description" content="VerdictForge summarizes Indian court judgments into legal + plain English formats. Built for law students and lawyers in India.">
-  <meta name="keywords" content="Indian legal AI, court case summarizer, law student tools, AI legal tech India, judgment summaries">
-  <meta name="robots" content="index, follow">
-  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="https://verdictforge.onrender.com/favicon.png" type="image/png">
+  <script>
+    document.title = "VerdictForge – Indian Legal Judgment Summarizer";
+  </script>
 </head>
 """, height=0)
 
-# --- SEO Meta Tags (still useful for social sharing) ---
+# --- SEO Meta Tags for Google and social preview ---
 st.markdown("""
 <!-- SEO Meta Tags -->
-<meta name="title" content="VerdictForge - AI Legal Judgment Summarizer">
-<meta name="description" content="Summarize Indian court judgments using AI. Built for law students, legal researchers, and professionals.">
+<meta name="title" content="VerdictForge – AI Legal Judgment Summarizer">
+<meta name="description" content="VerdictForge summarizes Indian court judgments into legal + plain English formats. Built for law students and lawyers in India.">
 <meta name="keywords" content="AI Legal Summarizer, Indian Court Judgments, Case Summary, Law AI, Legal Tech India">
 <meta name="author" content="VerdictForge by Parthiv M S">
-<meta property="og:title" content="VerdictForge - Legal Judgment Summarizer" />
+<meta property="og:title" content="VerdictForge – Legal Judgment Summarizer" />
 <meta property="og:description" content="Summarize Indian legal judgments in seconds with our AI-powered tool." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://verdictforge.in/" />
 <meta property="og:image" content="https://verdictforge.in/favicon.png" />
 """, unsafe_allow_html=True)
 
-# --- Google AdSense ---
+# --- Google AdSense Verification ---
 st.markdown("""
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1762689473102041"
