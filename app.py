@@ -1,12 +1,28 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import requests
 import json
 import os
 
 # --- Page Setup ---
-st.set_page_config(page_title="VerdictForge - Judgment Summarizer", page_icon="⚖️")
+st.set_page_config(
+    page_title="VerdictForge – Legal Judgment Summarizer",
+    page_icon="favicon.png",  # Make sure this file exists in your repo
+    layout="wide"
+)
 
-# --- SEO Meta Tags ---
+# --- SEO Fix for Google Preview ---
+components.html("""
+<head>
+  <title>VerdictForge – Indian Legal Judgment Summarizer</title>
+  <meta name="description" content="VerdictForge summarizes Indian court judgments into legal + plain English formats. Built for law students and lawyers in India.">
+  <meta name="keywords" content="Indian legal AI, court case summarizer, law student tools, AI legal tech India, judgment summaries">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="favicon.png" type="image/png">
+</head>
+""", height=0)
+
+# --- SEO Meta Tags (still useful for social sharing) ---
 st.markdown("""
 <!-- SEO Meta Tags -->
 <meta name="title" content="VerdictForge - AI Legal Judgment Summarizer">
