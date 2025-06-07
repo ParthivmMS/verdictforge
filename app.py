@@ -7,21 +7,26 @@ import os
 # --- Page Setup ---
 st.set_page_config(
     page_title="VerdictForge – Legal Judgment Summarizer",
-    page_icon="favicon.png",  # fallback only
+    page_icon="favicon.png",  # fallback
     layout="wide"
 )
 
-# --- Manual Favicon + Title Injection (Streamlit + Render compatible) ---
+# --- Force Favicon + Title using DOM JavaScript ---
 components.html("""
-<head>
-  <link rel="icon" href="https://raw.githubusercontent.com/ParthivmMS/verdictforge/main/favicon.png" type="image/png">
-  <script>
-    document.title = "VerdictForge – Indian Legal Judgment Summarizer";
-  </script>
-</head>
+<script>
+  // Set Title
+  document.title = "VerdictForge – Indian Legal Judgment Summarizer";
+
+  // Replace favicon dynamically
+  const link = document.createElement('link');
+  link.rel = 'icon';
+  link.type = 'image/png';
+  link.href = 'https://raw.githubusercontent.com/ParthivmMS/verdictforge/main/favicon.png';
+  document.head.appendChild(link);
+</script>
 """, height=0)
 
-# --- SEO Meta Tags for Google + Social Preview ---
+# --- SEO Meta Tags ---
 st.markdown("""
 <!-- SEO Meta Tags -->
 <meta name="title" content="VerdictForge – AI Legal Judgment Summarizer">
