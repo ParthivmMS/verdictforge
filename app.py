@@ -7,7 +7,7 @@ import os
 # --- Page Setup ---
 st.set_page_config(
     page_title="VerdictForge – Legal Judgment Summarizer",
-    page_icon="favicon.png",  # fallback
+    page_icon="favicon.jpg",  # fallback
     layout="wide"
 )
 
@@ -21,7 +21,7 @@ components.html("""
   const link = document.createElement('link');
   link.rel = 'icon';
   link.type = 'image/png';
-  link.href = 'https://raw.githubusercontent.com/ParthivmMS/verdictforge/main/favicon.png';
+  link.href = 'https://github.com/ParthivmMS/verdictforge/blob/main/favicon.jpg';
   document.head.appendChild(link);
 </script>
 """, height=0)
@@ -37,7 +37,7 @@ st.markdown("""
 <meta property="og:description" content="Summarize Indian legal judgments in seconds with our AI-powered tool." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://verdictforge.in/" />
-<meta property="og:image" content="https://raw.githubusercontent.com/ParthivmMS/verdictforge/main/favicon.png" />
+<meta property="og:image" content="https://github.com/ParthivmMS/verdictforge/blob/main/favicon.jpg" />
 """, unsafe_allow_html=True)
 
 # --- Google AdSense Script ---
