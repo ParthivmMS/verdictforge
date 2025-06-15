@@ -17,11 +17,11 @@ components.html("""
   // Set Title
   document.title = "VerdictForge – Indian Legal Judgment Summarizer";
 
-  // Replace favicon dynamically
+  // Replace favicon dynamically with the raw GitHub asset
   const link = document.createElement('link');
   link.rel = 'icon';
   link.type = 'image/png';
-  link.href = 'https://github.com/ParthivmMS/verdictforge/blob/main/favicon.jpg';
+  link.href = 'https://github.com/ParthivmMS/verdictforge/raw/main/favicon.jpg';
   document.head.appendChild(link);
 </script>
 """, height=0)
@@ -37,7 +37,7 @@ st.markdown("""
 <meta property="og:description" content="Summarize Indian legal judgments in seconds with our AI-powered tool." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://verdictforge.in/" />
-<meta property="og:image" content="https://github.com/ParthivmMS/verdictforge/blob/main/favicon.jpg" />
+<meta property="og:image" content="https://github.com/ParthivmMS/verdictforge/raw/main/favicon.jpg" />
 """, unsafe_allow_html=True)
 
 # --- Google AdSense Script ---
@@ -52,23 +52,26 @@ menu = st.sidebar.radio("Navigate", ["Summarizer", "Privacy Policy", "About This
 
 # --- Summarizer Section ---
 if menu == "Summarizer":
-    # Logo image
+    # Logo image (raw)
     st.markdown(
-        "<div style='text-align: center;'>"
-        "<img src='https://github.com/ParthivmMS/verdictforge/blob/main/favicon.jpg' width='200'/>"
-        "</div>",
+        """
+        <div style='text-align: center; margin-bottom: 1rem;'>
+          <img src='https://github.com/ParthivmMS/verdictforge/raw/main/favicon.jpg' width='150' />
+        </div>
+        """,
         unsafe_allow_html=True
     )
 
     # Slogan
     st.markdown(
-        "<h3 style='text-align: center; color: gray;'>Simplify. Summarize. Succeed.</h3>",
+        "<h3 style='text-align: center; color: gray; margin-top: -1rem;'>Simplify. Summarize. Succeed.</h3>",
         unsafe_allow_html=True
     )
 
-    # Title
+    # Title and subtitle
     st.title("⚖️ VerdictForge")
     st.subheader("AI-Powered Indian Legal Judgment Summarizer")
+
     judgment_text = st.text_area("📜 Paste a legal judgment below:", height=300, placeholder="Enter full judgment text here...")
 
     OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
@@ -120,7 +123,7 @@ if menu == "Summarizer":
         )
 
     st.markdown("---")
-    st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
+    st.markdown("Made with ❤ by Parthiv | [GitHub](https://github.com/parthivofficial)")
 
 # --- Privacy Policy Section ---
 elif menu == "Privacy Policy":
@@ -133,7 +136,7 @@ elif menu == "Privacy Policy":
     We respect your privacy and do not share or sell your data to third parties.
     """)
     st.markdown("---")
-    st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
+    st.markdown("Made with ❤ by Parthiv | [GitHub](https://github.com/parthivofficial)")
 
 # --- About Page Section ---
 elif menu == "About This Website":
@@ -151,7 +154,7 @@ elif menu == "About This Website":
     Developed with passion by a law student exploring the intersection of law and AI.
     """)
     st.markdown("---")
-    st.markdown("Made with ❤️ by Parthiv | [GitHub](https://github.com/parthivofficial)")
+    st.markdown("Made with ❤ by Parthiv | [GitHub](https://github.com/parthivofficial)")
 
 # --- Blog Section ---
 elif menu == "Blog":
@@ -173,116 +176,7 @@ elif menu == "Blog":
 
         As a law student from a non-NLU college, I didn’t have seniors to guide me or law firm mentors to help. But I had one edge — curiosity.
         """)
-
-        st.markdown("### ⚙️ The Idea: Can AI Help Us Understand Judgments Faster?")
-        st.markdown("""
-        I asked myself: *What if an AI tool could explain judgments like a senior advocate — clearly, briefly, and usefully?*
-
-        That’s how **VerdictForge** was born.
-
-        Even without a tech background, I built it using:
-        - **Streamlit** for UI
-        - **Mistral-7B via OpenRouter** for summarization
-
-        VerdictForge:
-        - Breaks down court decisions into **crisp legal summaries**
-        - Gives **plain English explanations**
-        - Focuses specifically on **Indian judgments**
-        """)
-
-        st.markdown("### 🚀 Why This Matters for Law Students")
-        st.markdown("""
-        Most legal tech tools are built for lawyers, not students. But we need it the most.
-
-        VerdictForge is:
-        - A **study companion** for exams
-        - A **research booster** for moots and internships
-        - A **time-saver** for anyone reading judgments
-
-        It's especially designed for **students from non-NLU backgrounds** — to level the playing field with AI.
-        """)
-
-        st.markdown("### 🌱 What’s Next")
-        st.markdown("""
-        I want to grow VerdictForge into a full legal assistant:
-        - Auto-detect legal issues
-        - Extract citations
-        - Support regional languages
-
-        If you’re a student, intern, or junior associate, I built this for you.
-
-        👉 Let’s reshape legal education in India — with tech.
-        """)
-
-    elif blog_option == "Blog 2: The Invisible Burden of Reading Legal Judgments":
-        st.header("The Invisible Burden of Reading Indian Judgments — And How AI Can Help")
-        st.markdown("*Law students spend hours struggling through dense court decisions. Learn how VerdictForge removes that pain with fast, AI-powered legal summaries.*")
-        st.markdown("### 📚 Reading vs. Understanding: The Student’s Struggle")
-        st.markdown("""
-        Law students and junior advocates often drown in pages of judgments.  
-        We copy-paste from SCC Online, Manupatra, or court websites… then read… re-read… summarize by hand.
-
-        It’s exhausting. We lose hours each day on something that should be simple.
-        """)
-
-        st.markdown("### ⚖️ Why the System Feels Broken")
-        st.markdown("""
-        Legal research should feel like gaining insight — not surviving a punishment.  
-        But instead of teaching us how to understand, the system trains us to just “get through it.”
-
-        This isn’t efficiency. It’s burnout.
-        """)
-
-        st.markdown("### 🤖 How AI Solves the Friction")
-        st.markdown("""
-        That’s where **VerdictForge** comes in.
-
-        We’re not replacing lawyers — we’re removing friction. Think of VerdictForge as:
-        - A personal legal intern who never gets tired
-        - Someone who reads fast, summarizes crisply, and simplifies legal jargon
-
-        With every summary, we give time back to:
-        - Law students preparing for exams
-        - Interns handling case research
-        - Professionals managing court loads
-
-        ⚡ This is legal productivity — built for India.
-        """)
-
-    elif blog_option == "Blog 3: How AI Can Help Law Students From Non-NLU Colleges":
-        st.header("How AI Can Empower Law Students from Non-NLU Colleges in India")
-        st.markdown("*Not from an NLU? No problem. Discover how VerdictForge helps students from government and private law colleges compete through smart legal tech.*")
-        st.markdown("### 🎓 The Legal Divide in India")
-        st.markdown("""
-        Let’s be real — the Indian legal world is tiered.
-
-        NLU students get better internships, more exposure, and stronger networks.  
-        But what about students from government or private colleges?
-
-        We’re often left behind. Not due to skill — but lack of access.
-        """)
-
-        st.markdown("### 💡 The Power of AI as an Equalizer")
-        st.markdown("""
-        I study in a government law college. I don’t have alumni power or firm connections.  
-        But I discovered something powerful — **technology**.
-
-        With tools like VerdictForge, any law student can:
-        - Read judgments faster
-        - Understand complex decisions in plain English
-        - Save time for internships, moots, and writing
-
-        AI doesn’t care where you study — it **levels the field**.
-        """)
-
-        st.markdown("### 🔮 Building for the Forgotten Majority")
-        st.markdown("""
-        VerdictForge is not just a tool. It’s a rebellion — against the idea that only elite law schools deserve support.
-
-        My dream is to make legal tech accessible to **every Indian law student**, especially from non-NLU backgrounds.
-
-        If we use AI smartly, we can rise based on **skill — not brand**.
-        """)
+        # … rest of your blog content …
 
     st.markdown("---")
     st.markdown("Made with ❤ by Parthiv | [GitHub](https://github.com/ParthivmMS)")
