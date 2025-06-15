@@ -52,9 +52,23 @@ menu = st.sidebar.radio("Navigate", ["Summarizer", "Privacy Policy", "About This
 
 # --- Summarizer Section ---
 if menu == "Summarizer":
+    # Logo image
+    st.markdown(
+        "<div style='text-align: center;'>"
+        "<img src='https://github.com/ParthivmMS/verdictforge/blob/main/favicon.jpg' width='200'/>"
+        "</div>",
+        unsafe_allow_html=True
+    )
+
+    # Slogan
+    st.markdown(
+        "<h3 style='text-align: center; color: gray;'>Simplify. Summarize. Succeed.</h3>",
+        unsafe_allow_html=True
+    )
+
+    # Title
     st.title("⚖️ VerdictForge")
     st.subheader("AI-Powered Indian Legal Judgment Summarizer")
-
     judgment_text = st.text_area("📜 Paste a legal judgment below:", height=300, placeholder="Enter full judgment text here...")
 
     OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
