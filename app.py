@@ -4,19 +4,19 @@ import requests
 import json
 import os
 
-# Inject static SEO HTML file (Google will read it)
-try:
-    components.html(open("static/index.html", "r").read(), height=0)
-except Exception as e:
-    st.warning("Could not inject SEO metadata.")
-    st.exception(e)
-
 # --- Page Setup ---
 st.set_page_config(
     page_title="VerdictForge – Legal Judgment Summarizer",
     page_icon="favicon.jpg",  # fallback
     layout="wide"
 )
+
+# Inject static SEO HTML file (Google will read it)
+try:
+    components.html(open("static/index.html", "r").read(), height=0)
+except Exception as e:
+    st.warning("Could not inject SEO metadata.")
+    st.exception(e)
 
 # --- Force Favicon + Title using DOM JavaScript ---
 components.html("""
