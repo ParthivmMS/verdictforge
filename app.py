@@ -164,13 +164,15 @@ elif menu == "About This Website":
     st.markdown("Made with ❤ by Parthiv | [GitHub](https://github.com/parthivofficial)")
 
 # --- Blog Section ---
+# --- Blog Section ---
 elif menu == "Blog":
     st.title("📚 Blog")
 
     blog_option = st.selectbox("Choose a blog to read:", [
         "Blog 1: Why I Built an AI Legal Summarizer as a Law Student in India",
         "Blog 2: The Invisible Burden of Reading Legal Judgments",
-        "Blog 3: How AI Can Help Law Students From Non-NLU Colleges"
+        "Blog 3: How AI Can Help Law Students From Non-NLU Colleges",
+        "Blog 4: Top 5 Legal Research Tools Every Indian Law Student Should Use in 2025"
     ])
 
     if blog_option == "Blog 1: Why I Built an AI Legal Summarizer as a Law Student in India":
@@ -183,6 +185,73 @@ elif menu == "Blog":
 
         As a law student from a non-NLU college, I didn’t have seniors to guide me or law firm mentors to help. But I had one edge — curiosity.
         """)
+        # (Continue rest of Blog 1…)
+
+    elif blog_option == "Blog 2: The Invisible Burden of Reading Legal Judgments":
+        st.header("The Invisible Burden of Reading Indian Judgments — And How AI Can Help")
+        st.markdown("*Law students spend hours struggling through dense court decisions. Learn how VerdictForge removes that pain with fast, AI-powered legal summaries.*")
+        # (Continue Blog 2…)
+
+    elif blog_option == "Blog 3: How AI Can Help Law Students From Non-NLU Colleges":
+        st.header("How AI Can Empower Law Students from Non-NLU Colleges in India")
+        st.markdown("*Not from an NLU? No problem. Discover how VerdictForge helps students from government and private law colleges compete through smart legal tech.*")
+        # (Continue Blog 3…)
+
+    elif blog_option == "Blog 4: Top 5 Legal Research Tools Every Indian Law Student Should Use in 2025":
+        st.header("Top 5 Legal Research Tools Every Indian Law Student Should Use in 2025")
+        st.markdown("*Supercharge your legal studies with these must-use tools — especially if you’re in a government or private law college.*")
+
+        st.markdown("### 1️⃣ SCC Online – Your Judgment Goldmine")
+        st.markdown("""
+        If you're serious about case law, you can’t avoid SCC Online. It's the gold standard for accessing Supreme Court and High Court judgments, along with citations.
+        
+        - Use it for: Researching landmark cases, citations, legal doctrines  
+        - Tip: Use the “Case Note” section to get quick summaries.
+        """)
+
+        st.markdown("### 2️⃣ Manupatra – India's All-Round Legal Research Engine")
+        st.markdown("""
+        Manupatra is like a one-stop shop for case law, statutes, notifications, and legal commentary.
+
+        - Use it for: Advanced case filtering, case maps, tracking precedents  
+        - Tip: Use the ‘Referencer’ feature to quickly understand important legal concepts.
+        """)
+
+        st.markdown("### 3️⃣ Indian Kanoon – Free, Fast, Functional")
+        st.markdown("""
+        On a budget? Indian Kanoon gives you access to judgments, acts, and rules for free.
+
+        - Use it for: Quick case lookup, bare act reading  
+        - Tip: Use double quotes around search terms for better accuracy (“Article 21”).
+        """)
+
+        st.markdown("### 4️⃣ ChatGPT / VerdictForge – AI for Legal Summarization")
+        st.markdown("""
+        For quick comprehension of long judgments, AI tools like **VerdictForge** (or ChatGPT with legal prompts) save tons of time.
+
+        - Use it for: Summarizing long cases, preparing for class discussions, exam prep  
+        - Tip: Always read the judgment yourself after getting the summary.
+        """)
+
+        st.markdown("### 5️⃣ LiveLaw & Bar & Bench – Legal News You Need")
+        st.markdown("""
+        Legal research isn’t just about old cases. Stay updated with current legal developments using LiveLaw and Bar & Bench.
+
+        - Use it for: Learning ongoing constitutional issues, legal controversies, court reporting  
+        - Tip: Follow their Twitter handles for real-time updates.
+        """)
+
+        st.markdown("### ⚖️ Final Word")
+        st.markdown("""
+        You don’t need to master all five tools — but using just two or three of them regularly will level you up.
+
+        Law is 50% reading and 50% understanding. These tools help you do both faster and smarter.
+
+        Keep learning, co-founder.
+        """)
+
+    st.markdown("---")
+    st.markdown("Made with ❤ by Parthiv | [GitHub](https://github.com/ParthivmMS)")
         # … rest of your blog content …
 
     st.markdown("---")
