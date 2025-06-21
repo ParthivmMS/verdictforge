@@ -11,6 +11,14 @@ st.set_page_config(
     layout="wide"
 )
 
+# --- Inject static file discoverability (ads.txt, robots.txt, sitemap.xml) ---
+components.html("""
+<link rel="icon" href="/favicon.png" />
+<meta name="robots" content="all" />
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+<link rel="alternate" type="text/plain" title="Ads.txt" href="/ads.txt" />
+""", height=0)
+
 # Inject static SEO HTML file (Google will read it)
 try:
     components.html(open("static/index.html", "r").read(), height=0)
