@@ -157,4 +157,4 @@ elif menu == "About This Website":
     Developed with passion by a law student exploring the intersection of law and AI.
     """)
     st.markdown("---")
-    st.markdown("Made with ❤ by Parthiv |
+    st.markdown("Made with ❤ by Parthiv | [GitHub](https://github.com/parthivofficial)")
