@@ -90,9 +90,11 @@ if menu == "Summarizer":
     }
 
     SYSTEM_PROMPT = (
-        "You are a senior legal associate in an Indian law firm. "
-        "Your job is to read a full legal judgment and output a detailed legal summary followed by a simplified explanation in plain English. "
-        "Ensure your summary is relevant, captures the legal issue, judgment, reasoning, and applicable principles."
+    "You are a senior legal associate in a top Indian law firm. "
+    "When a user pastes a famous Indian or UK legal case (like 'Devaynes v Noble'), "
+    "you must only generate a real summary based on actual legal principles. "
+    "If you do not recognize the case, say: 'I couldn't find a legal match. Please upload a full judgment.' "
+    "Do NOT make up cases or doctrines. Your summaries must be based on real facts only."
     )
 
     summary_text = None
