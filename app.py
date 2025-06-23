@@ -162,4 +162,10 @@ elif menu == "About This Website":
     Developed with passion by a law student exploring the intersection of law and AI.
     """)
     st.markdown("---")
-    st.markdown("Made with ❤ by Parthiv | [GitHub](https://github.com/parthivofficial)")
+st.markdown("Made with ❤ by Parthiv | [GitHub](https://github.com/parthivofficial)")
+
+st.markdown("""
+<p style='text-align: center; font-size: 0.85rem; color: gray; margin-top: 2rem;'>
+🤖 VerdictForge uses AI to generate legal summaries. While it strives for accuracy, AI can sometimes make mistakes. Always cross-check with official legal sources.
+</p>
+""", unsafe_allow_html=True)
